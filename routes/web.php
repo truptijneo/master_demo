@@ -89,6 +89,8 @@ Route::get('/orders', 'OrderController@orders')->name('orders');
 Route::get('/order/{id}', 'OrderController@order')->name('order');
 });
 
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/show-product/{id}', 'ProductController@showProduct')->name('showProduct');
 Route::any('/search', 'WelcomeController@search')->name('search');

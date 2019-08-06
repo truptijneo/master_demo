@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable 
 {
     use Notifiable;
     use HasRoles;
@@ -17,7 +17,8 @@ class User extends Authenticatable
      * @var array
      */
 
-     
+    protected $table= 'users'; 
+
     protected $fillable = [
         'name', 'email', 'password', 'created_at', 'updated_at'
     ];
@@ -31,7 +32,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles(){
+    public function identities()
+    {
+        return $this->hasMany('App\SocialIdentity');
+    }
+
+    public function roles()
+    {
         return $this->belongsToMany('App\Role', 'user_role', 'user_id', 'role_id');
     }
 
